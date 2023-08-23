@@ -5,14 +5,18 @@ export const themeContext = createContext(null);
 
 function App() {
   const [theme, changeTheme] = useState("white");
-  let textColor;
   // const [theme, changeTheme] = useState({ background: "white", text: "black" });
+
+  let textColor;
+
   const backgroundClassName = "h-screen pt-40 px-80 bg-" + theme;
+
   if (theme === "white") {
     textColor = "black";
   } else {
     textColor = "white";
   }
+
   const textClassName = "ml-3 text-sm font-medium text-" + textColor;
 
   return (
