@@ -6,14 +6,12 @@ const Card_Component = () => {
   return (
      <themeContext.Consumer>{contextValue=>{
 
-      let cardBackground;
+      const cardBackground=contextValue==="white"?"black":"white";
   
-      if(contextValue==="white"){cardBackground="black"}
-      else {cardBackground="white"}
-
+      
       const cardClassName="rounded w-80 h-96 bg-"+cardBackground;
       const textClassName="text-"+contextValue
-      
+
      return (
     <div className={cardClassName}>
         <div className="px-6 py-4">
