@@ -13,7 +13,6 @@ function App() {
           <label className="relative inline-flex cursor-pointer">
             <input
               type="checkbox"
-              value=""
               className="sr-only peer"
               onClick={() => {
                 changeTheme(theme === "white" ? "black" : "white");
