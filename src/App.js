@@ -6,7 +6,6 @@ export const themeContext = createContext(null);
 function App() {
   const [theme, changeTheme] = useState("white");
 
-  const textColor = theme === "white" ? "black" : "white";
 
   return (
     <div>
@@ -19,6 +18,7 @@ function App() {
               className="sr-only peer"
               onClick={() => {
                 changeTheme(theme === "white" ? "black" : "white");
+               
               }}
             />
             <div
@@ -29,7 +29,11 @@ function App() {
             after:border after:rounded-full after:h-5 after:w-5 after:transition-all
              dark:border-black peer-checked:bg-white"
             ></div>
-            <span className={`ml-3 text-sm font-medium text-${textColor}`}>
+            <span
+              className={`ml-3 text-sm font-medium text-${
+                theme === "white" ? "black" : "white"
+              }`}
+            >
               Change Theme
             </span>
           </label>
