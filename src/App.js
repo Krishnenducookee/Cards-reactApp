@@ -10,7 +10,7 @@ function App() {
     <div>
       <themeContext.Provider value={theme}>
         <div className={`h-screen pt-40 px-80 bg-${theme}`}>
-          <label className="relative inline-flex items-center cursor-pointer">
+          <label className="relative inline-flex cursor-pointer">
             <input
               type="checkbox"
               value=""
