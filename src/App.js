@@ -18,13 +18,11 @@ function App() {
                 changeTheme(theme === "white" ? "black" : "white");
               }}
             />
-            <div
-              className="w-11 h-6 bg-black  rounded-full 
-               peer-checked:after:translate-x-full 
-             after:absolute after:rounded-full after:h-5 after:w-5  after:border
-             after:border-white after:bg-black after:top-[2px] after:left-[2px]
-              after:transition-all
-              peer-checked:bg-white"
+             <div
+              className="w-11 h-6 bg-black rounded-full after:absolute
+            after:rounded-full after:h-5 after:w-5  after:border after:border-white
+            after:bg-black after:mt-1 after:transition-all peer-checked:bg-white
+            peer-checked:after:translate-x-full"
             ></div>
             <span
               className={`ml-3 text-sm font-medium text-${
