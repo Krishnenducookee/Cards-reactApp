@@ -7,15 +7,9 @@ function App() {
   const [theme, changeTheme] = useState("white");
   // const [theme, changeTheme] = useState({ background: "white", text: "black" });
 
-  let textColor;
+  const textColor = theme === "white" ? "black" : "white";
 
   const backgroundClassName = "h-screen pt-40 px-80 bg-" + theme;
-
-  if (theme === "white") {
-    textColor = "black";
-  } else {
-    textColor = "white";
-  }
 
   const textClassName = "ml-3 text-sm font-medium text-" + textColor;
 
@@ -29,14 +23,12 @@ function App() {
               value=""
               className="sr-only peer"
               onClick={() => {
-                changeTheme(
-                  (preState) => (preState === "white" ? "black" : "white")
-                  // preState.background === "white"
-                  //   ? ((preState.background = "black"),
-                  //     (preState.text = "white"))
-                  //   : ((preState.background = "white"),
-                  //     (preState.text = "black"))
-                );
+                changeTheme(theme === "white" ? "black" : "white");
+                // preState.background === "white"
+                //   ? ((preState.background = "black"),
+                //     (preState.text = "white"))
+                //   : ((preState.background = "white"),
+                //     (preState.text = "black"))
               }}
             />
             <div
