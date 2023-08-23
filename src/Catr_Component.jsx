@@ -1,4 +1,3 @@
-
 import { themeContext } from './App'
 
 const Card_Component = () => {
