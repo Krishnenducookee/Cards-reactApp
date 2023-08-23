@@ -5,8 +5,7 @@ export const themeContext = createContext(null);
 
 function App() {
   const [theme, changeTheme] = useState("white");
-  // const [theme, changeTheme] = useState({ background: "white", text: "black" });
-
+  
   return (
     <div>
       <themeContext.Provider value={theme}>
@@ -18,11 +17,6 @@ function App() {
               className="sr-only peer"
               onClick={() => {
                 changeTheme(theme === "white" ? "black" : "white");
-                // preState.background === "white"
-                //   ? ((preState.background = "black"),
-                //     (preState.text = "white"))
-                //   : ((preState.background = "white"),
-                //     (preState.text = "black"))
               }}
             />
             <div
