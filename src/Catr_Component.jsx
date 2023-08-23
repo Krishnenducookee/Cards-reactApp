@@ -1,20 +1,29 @@
-import React from 'react'
+
+import { themeContext } from './App'
 
 const Card_Component = () => {
+  
   return (
-    <div className='rounded bg-black w-80 h-96'>
+     <themeContext.Consumer>{contextValue=>{
+
+      let cardBackground;
+  
+      if(contextValue==="white"){cardBackground="black"}
+      else {cardBackground="white"}
+
+      const cardClassName="rounded w-80 h-96 bg-"+cardBackground;
+      const textClassName="text-"+contextValue
+      
+     return (
+    <div className={cardClassName}>
         <div className="px-6 py-4">
-            <p className="text-white">
-              Is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not
-              only five centuries, but also the leap into electronic
-              typesetting, remaining essentially unchanged. It was popularised
-              in the 1960s with the release of Letraset sheets containing Lorem
-              Ipsum passages.
+            <p className={textClassName}>
+              This is Text inside Cards<br/>
+              This is Text inside Cards<br/>
+              This is Text inside Cards<br/>
             </p>
-          </div></div>
+          </div></div>)}}
+           </themeContext.Consumer>
   )
 }
 
