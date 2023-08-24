@@ -23,7 +23,7 @@ const Card_Component = () => {
             </p>
             <input type="text" name="text1" className="mt-6"
              value= {sessionStorage.getItem('text')}
-             placeholder="Type here" onChange={(e)=>{
+              onChange={(e)=>{
             sessionStorage.setItem('text',e.target.value)}}/>
           </div></div>
           // )}}
