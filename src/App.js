@@ -15,10 +15,9 @@ function App() {
               type="checkbox"
               className="sr-only peer"
               onClick={() => {
-                changeTheme(theme === "white" ? "black" : "white");
-              }}
+               changeTheme(theme === "white" ? "black" : "white");}}
             />
-             <div
+            <div
               className="w-11 h-6 bg-black rounded-full after:absolute
             after:rounded-full after:h-5 after:w-5  after:border after:border-white
             after:bg-black after:mt-1 after:transition-all peer-checked:bg-white
