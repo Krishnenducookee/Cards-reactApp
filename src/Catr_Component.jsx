@@ -1,14 +1,16 @@
-import { useContext,useState  } from "react"
+import { useContext} from "react"
 import { themeContext } from "./App"
+
+
 
 
 const Card_Component = () => {
    const contextValue =useContext(themeContext)
-   const [text, settext] = useState("")
    
     const cardBackground=contextValue?"bg-black":"bg-white"
     const textColor=contextValue?"white":"black"
-  return (
+    
+    return (
     //  <themeContext.Consumer>{contextValue=>{
   
     //  return (
@@ -20,7 +22,9 @@ const Card_Component = () => {
               This is Text inside Cards<br/>
             </p>
             <input type="text" name="text1" className="mt-6"
-             placeholder="Type here" onChange={(e)=>{settext(e.target.value)}}/>
+             value= {sessionStorage.getItem('text')}
+             placeholder="Type here" onChange={(e)=>{
+            sessionStorage.setItem('text',e.target.value)}}/>
           </div></div>
           // )}}
           //  </themeContext.Consumer>
