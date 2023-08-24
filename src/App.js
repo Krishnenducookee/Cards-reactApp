@@ -4,18 +4,20 @@ import Card_Component from "./Catr_Component";
 export const themeContext = createContext(null);
 
 function App() {
-  const [theme, changeTheme] = useState("white");
+  const [theme, changeTheme] = useState(true);
+  const background=theme?"white":"black"
+  const textColor=theme?"black":"white"
   
   return (
     <div>
       <themeContext.Provider value={theme}>
-        <div className={`h-screen pt-40 px-80 bg-${theme}`}>
+        <div className={`h-screen pt-40 px-80 bg-${background}`}>
           <label className="relative inline-flex cursor-pointer">
             <input
               type="checkbox"
               className="sr-only peer"
               onClick={() => {
-               changeTheme(theme === "white" ? "black" : "white");}}
+               changeTheme(theme?false:true);}}
             />
             <div
               className="w-11 h-6 bg-black rounded-full after:absolute
@@ -24,9 +26,7 @@ function App() {
             peer-checked:after:translate-x-full"
             ></div>
             <span
-              className={`ml-3 text-sm font-medium text-${
-                theme === "white" ? "black" : "white"
-              }`}
+              className={`ml-3 text-sm font-medium text-${textColor}`}
             >
               Change Theme
             </span>
