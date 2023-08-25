@@ -11,13 +11,17 @@ function App() {
 
   const background=isWhite?"white":"black"
   const textColor=isWhite?"black":"white"
+
+  const leftTextfield=sessionStorage.getItem('textFromLeftField')
+  const rightTextfield=sessionStorage.getItem('textFromRightField')
+  
    
   useEffect(()=>{ 
         setSessionStorageData(
-          {textFromLeftField:sessionStorage.getItem('textFromLeftField'),
-          textFromRightField:sessionStorage.getItem('textFromRightField')}
-          )
-   },[])
+          {textFromLeftField:leftTextfield,
+          textFromRightField:rightTextfield})
+          sessionStorage.clear()
+   },[leftTextfield,rightTextfield])
 
 
   const components=[
