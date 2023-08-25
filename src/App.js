@@ -50,7 +50,7 @@ function App() {
             </span>
           </label>     
           {components.map((data,index)=>(
-           <div className={index===1?"ml-96 -mt-96":""}>
+           <div className={`${index===1?`ml-96 -mt-96`:``}`}>
            <CardComponent text={data.text} 
            onChange={data.onChange}/>
            </div>
