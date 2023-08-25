@@ -1,34 +1,40 @@
 import { useContext} from "react"
-import { themeContext } from "./App"
+import { ThemeContext } from "./App"
 
 
 
 
-const Card_Component = () => {
-   const contextValue =useContext(themeContext)
+const CardComponent = ({text,onChange}) => {
+  console.log(text);
+   const isThemeWhite =useContext(ThemeContext)
    
-    const cardBackground=contextValue?"bg-black":"bg-white"
-    const textColor=contextValue?"white":"black"
+    const cardBackground=isThemeWhite?"bg-black":"bg-white"
+    // const textColor=contextValue?"text-white":"text-black"
     
-    return (
+    //  localStorage.setItem('text',text)
+   
+
+  return (
     //  <themeContext.Consumer>{contextValue=>{
   
     //  return (
     <div className={`rounded w-80 h-96 ${cardBackground}`}>
         <div className="px-6 py-4">
-            <p className={`text-${textColor}`}>
+            {/* <p className={textColor}>
               This is Text inside Cards<br/>
               This is Text inside Cards<br/>
               This is Text inside Cards<br/>
-            </p>
+            </p> */}
             <input type="text" name="text1" className="mt-6"
-             value= {sessionStorage.getItem('text')}
-              onChange={(e)=>{
-            sessionStorage.setItem('text',e.target.value)}}/>
+             value={text}
+             onChange={(e)=>{
+              onChange(e.target.value)
+             }}/>
           </div></div>
+          
           // )}}
           //  </themeContext.Consumer>
   )
 }
 
-export default Card_Component
+export default CardComponent
