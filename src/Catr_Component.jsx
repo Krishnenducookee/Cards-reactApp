@@ -8,7 +8,7 @@ const CardComponent = ({text,onChange}) => {
   console.log(text);
    const isThemeWhite =useContext(ThemeContext)
    
-    const cardBackground=isThemeWhite?"bg-black":"bg-white"
+    const cardBackground=`${isThemeWhite?`bg-black`:`bg-white`}`
     // const textColor=contextValue?"text-white":"text-black"
     
     //  localStorage.setItem('text',text)
