@@ -4,31 +4,44 @@ import CardComponent from "./Catr_Component";
 export const ThemeContext = createContext(null);
 
 function App() {
-
   const [isWhite, toggleWhite] = useState(true);
-  const [sessionStorageData, setSessionStorageData] = 
-              useState({textFromLeftField:"",textFromRightField:""})
+  const [textFieldData, setTextFieldData] = useState({
+    textFromLeftField: "",
+    textFromRightField: "",
+  });
+  const sessionCallArray = [
+    { key: "textFromLeftField", value: textFieldData.textFromLeftField },
+    { key: "textFromRightField", value: textFieldData.textFromRightField },
+  ];
+  const background = `${isWhite ? `white` : `black`}`;
+  const textColor = `${isWhite ? `black` : `white`}`;
 
-  const background=isWhite?"white":"black"
-  const textColor=isWhite?"black":"white"
+  useEffect(() => {
+    setTextFieldData({
+      textFromLeftField: sessionStorage.getItem("textFromLeftField"),
+      textFromRightField: sessionStorage.getItem("textFromRightField"),
+    });
+    return () => {
+      sessionCallArray.map((data) => {
+        sessionStorage.setItem(data.key, data.value);
+      });
+    };
+  }, [sessionCallArray]);
 
-  const leftTextfield=sessionStorage.getItem('textFromLeftField')
-  const rightTextfield=sessionStorage.getItem('textFromRightField')
-  
-   
-  useEffect(()=>{ 
-        setSessionStorageData(
-          {textFromLeftField:leftTextfield,
-          textFromRightField:rightTextfield})
-          sessionStorage.clear()
-   },[leftTextfield,rightTextfield])
-
-
-  const components=[
-           {text:sessionStorageData.textFromLeftField,
-            onChange:(texttyped)=>{sessionStorage.setItem('textFromLeftField',texttyped)}},
-           {text:sessionStorageData.textFromRightField,
-            onChange:(texttyped)=>{sessionStorage.setItem('textFromRightField',texttyped)}}]  
+  const components = [
+    {
+      text: textFieldData.textFromLeftField,
+      onChange: (texttyped) => {
+        setTextFieldData({ textFromLeftField: texttyped });
+      },
+    },
+    {
+      text: textFieldData.textFromRightField,
+      onChange: (texttyped) => {
+        setTextFieldData({ textFromRightField: texttyped });
+      },
+    },
+  ];
 
   return (
     <div>
@@ -39,7 +52,8 @@ function App() {
               type="checkbox"
               className="sr-only peer"
               onClick={() => {
-                toggleWhite(!isWhite);}}
+                toggleWhite(!isWhite);
+              }}
             />
             <div
               className="w-11 h-6 bg-black rounded-full after:absolute
@@ -47,19 +61,19 @@ function App() {
             after:bg-black after:mt-1 after:transition-all peer-checked:bg-white
             peer-checked:after:translate-x-full after:ml-1"
             ></div>
-            <span
-              className={`ml-3 text-sm font-medium text-${textColor}`}
-            >
+            <span className={`ml-3 text-sm font-medium text-${textColor}`}>
               Change Theme
             </span>
-          </label>     
-          {components.map((data,index)=>(
-           <div className={`${index===1?`ml-96 -mt-96`:``}`}>
-           <CardComponent text={data.text} 
-           onChange={data.onChange}/>
-           </div>
-             ))} 
-
+          </label>
+          {components.map((data, index) => (
+            <div className={`${index === 1 ? `ml-96 -mt-96` : ``}`}>
+              <CardComponent
+                key={index}
+                text={data.text}
+                onChange={data.onChange}
+              />
+            </div>
+          ))}
         </div>
       </ThemeContext.Provider>
     </div>
