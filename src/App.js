@@ -5,7 +5,7 @@ export const ThemeContext = createContext(null);
 
 function App() {
   const [isWhite, toggleWhite] = useState(true);
-  const ref=useRef(true)
+  const firstRender=useRef(true)
   const [textFieldData, setTextFieldData] = useState({
     textFromLeftField: "",
     textFromRightField: "",
@@ -20,12 +20,12 @@ function App() {
   const textColor = `${isWhite ? `black` : `white`}`;
 
   useEffect(() => {
-    if(ref.current){
+    if(firstRender.current){
     setTextFieldData({
       textFromLeftField: sessionStorage.getItem("textFromLeftField"),
       textFromRightField: sessionStorage.getItem("textFromRightField"),
     })};
-    ref.current=false
+    firstRender.current=false
     return () => {
       addToSessionArray.forEach((data) => {
         sessionStorage.setItem(data.key, data.value);
