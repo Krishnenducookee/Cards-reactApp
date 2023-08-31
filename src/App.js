@@ -1,28 +1,33 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import CardComponent from "./Catr_Component";
 
 export const ThemeContext = createContext(null);
 
 function App() {
   const [isWhite, toggleWhite] = useState(true);
+  const ref=useRef(true)
   const [textFieldData, setTextFieldData] = useState({
     textFromLeftField: "",
     textFromRightField: "",
   });
+
   const addToSessionArray = [
     { key: "textFromLeftField", value: textFieldData.textFromLeftField },
     { key: "textFromRightField", value: textFieldData.textFromRightField },
   ];
+
   const background = `${isWhite ? `white` : `black`}`;
   const textColor = `${isWhite ? `black` : `white`}`;
 
   useEffect(() => {
+    if(ref.current){
     setTextFieldData({
       textFromLeftField: sessionStorage.getItem("textFromLeftField"),
       textFromRightField: sessionStorage.getItem("textFromRightField"),
-    });
+    })};
+    ref.current=false
     return () => {
-      addToSessionArray.map((data) => {
+      addToSessionArray.forEach((data) => {
         sessionStorage.setItem(data.key, data.value);
       });
     };
@@ -32,13 +37,13 @@ function App() {
     {
       text: textFieldData.textFromLeftField,
       onChange: (texttyped) => {
-        setTextFieldData({ textFromLeftField: texttyped });
+        setTextFieldData({...textFieldData, textFromLeftField: texttyped });
       },
     },
     {
       text: textFieldData.textFromRightField,
       onChange: (texttyped) => {
-        setTextFieldData({ textFromRightField: texttyped });
+        setTextFieldData({...textFieldData, textFromRightField: texttyped });
       },
     },
   ];
