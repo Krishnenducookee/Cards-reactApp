@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import CardComponent from "./Catr_Component";
 
 export const ThemeContext = createContext(null);
@@ -13,8 +13,7 @@ function App() {
     textFromRightField: "",
   });
 
-  const addToSessionArray =useMemo(()=> ["textFromLeftField","textFromRightField"
-  ],);
+  const addToSessionArray = ["textFromLeftField","textFromRightField"];
 
   const background = `${isWhite ? `white` : `black`}`;
   const textColor = `${isWhite ? `black` : `white`}`;
@@ -26,15 +25,13 @@ function App() {
       textFromRightField: sessionStorage.getItem("textFromRightField"),
     })
     firstRender.current=false};
-    // return () => {
-
-      addToSessionArray.forEach((data) => {
-        const value=data==="textFromLeftField"?
-              textFieldData.textFromLeftField:textFieldData.textFromRightField
-        sessionStorage.setItem(data,value);
-      });
-    // };
-  }, [addToSessionArray]);
+   
+    //  return () => {
+    addToSessionArray.forEach((arrayItem) => {
+      sessionStorage.setItem(arrayItem, textFieldData[arrayItem])      
+    });
+    //  };
+  },[addToSessionArray]);
 
   const components = [
     {
@@ -42,6 +39,7 @@ function App() {
       onChange:(textTyped) => {
         setTextFieldData({...textFieldData, textFromLeftField: textTyped });
       },
+      
     },
     {
       text: textFieldData.textFromRightField,
@@ -50,7 +48,7 @@ function App() {
       },
     },
   ];
-
+ 
   return (
     <div>
       <ThemeContext.Provider value={isWhite}>
