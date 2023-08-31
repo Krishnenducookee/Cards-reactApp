@@ -26,11 +26,11 @@ function App() {
       textFromRightField: sessionStorage.getItem("textFromRightField"),
     })};
     firstRender.current=false
-    return () => {
+   // return () => {
       addToSessionArray.forEach((data) => {
         sessionStorage.setItem(data.key, data.value);
       });
-    };
+   // };
   }, [addToSessionArray]);
 
   const components = [
