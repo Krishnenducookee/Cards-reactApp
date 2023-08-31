@@ -1,20 +1,20 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useMemo, useRef, useState } from "react";
 import CardComponent from "./Catr_Component";
 
 export const ThemeContext = createContext(null);
 
 function App() {
   const [isWhite, toggleWhite] = useState(true);
+  
   const firstRender=useRef(true)
+
   const [textFieldData, setTextFieldData] = useState({
     textFromLeftField: "",
     textFromRightField: "",
   });
 
-  const addToSessionArray = [
-    { key: "textFromLeftField", value: textFieldData.textFromLeftField },
-    { key: "textFromRightField", value: textFieldData.textFromRightField },
-  ];
+  const addToSessionArray =useMemo(()=> ["textFromLeftField","textFromRightField"
+  ],);
 
   const background = `${isWhite ? `white` : `black`}`;
   const textColor = `${isWhite ? `black` : `white`}`;
@@ -24,26 +24,29 @@ function App() {
     setTextFieldData({
       textFromLeftField: sessionStorage.getItem("textFromLeftField"),
       textFromRightField: sessionStorage.getItem("textFromRightField"),
-    })};
-    firstRender.current=false
-   // return () => {
+    })
+    firstRender.current=false};
+    // return () => {
+
       addToSessionArray.forEach((data) => {
-        sessionStorage.setItem(data.key, data.value);
+        const value=data==="textFromLeftField"?
+              textFieldData.textFromLeftField:textFieldData.textFromRightField
+        sessionStorage.setItem(data,value);
       });
-   // };
+    // };
   }, [addToSessionArray]);
 
   const components = [
     {
       text: textFieldData.textFromLeftField,
-      onChange: (texttyped) => {
-        setTextFieldData({...textFieldData, textFromLeftField: texttyped });
+      onChange:(textTyped) => {
+        setTextFieldData({...textFieldData, textFromLeftField: textTyped });
       },
     },
     {
       text: textFieldData.textFromRightField,
-      onChange: (texttyped) => {
-        setTextFieldData({...textFieldData, textFromRightField: texttyped });
+      onChange:(textTyped) => {
+        setTextFieldData({...textFieldData, textFromRightField: textTyped });
       },
     },
   ];
