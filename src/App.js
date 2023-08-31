@@ -9,7 +9,7 @@ function App() {
     textFromLeftField: "",
     textFromRightField: "",
   });
-  const sessionCallArray = [
+  const addToSessionArray = [
     { key: "textFromLeftField", value: textFieldData.textFromLeftField },
     { key: "textFromRightField", value: textFieldData.textFromRightField },
   ];
@@ -22,11 +22,11 @@ function App() {
       textFromRightField: sessionStorage.getItem("textFromRightField"),
     });
     return () => {
-      sessionCallArray.map((data) => {
+      addToSessionArray.map((data) => {
         sessionStorage.setItem(data.key, data.value);
       });
     };
-  }, [sessionCallArray]);
+  }, [addToSessionArray]);
 
   const components = [
     {
